@@ -33,7 +33,7 @@ class _DashBoardState extends State<DashBoard> {
                   final file =
                   await ImagePicker().getVideo(source: ImageSource.gallery,);
                   await VideoCompress.setLogLevel(0);
-                   final info = await VideoCompress.compressVideo(
+                  final info = await VideoCompress.compressVideo(
                     file.path,
                     quality: VideoQuality.LowQuality,
                     deleteOrigin: false,
@@ -41,48 +41,48 @@ class _DashBoardState extends State<DashBoard> {
                   );
                   if (info != null){
 
-                    setState(() async{
+                    setState(() {
                       _counter = "Successfully Compressed";
                       finalfile=File(info.path);
                       print(info.filesize);
                       print(finalfile.path);
-
-
-                      try {
-                        Reference ref = FirebaseStorage.instance.ref().child(
-                            'Videos').
-                        child(auth.currentUser.uid);
-                        ref.putFile(finalfile,
-                            SettableMetadata(contentType: 'video/mp4'));
-                        print("done");
-                        urlLink=await ref.getDownloadURL();
-                      }
-                      catch(e){
-                        print(e);
-                      }
                     });
 
-
-
+                    TaskSnapshot snapshot =await FirebaseStorage.instance.ref().child(
+                        'Videos').
+                    child(auth.currentUser.uid).putFile(finalfile,
+                        SettableMetadata(contentType: 'video/mp4'));
+                    print("done");
+                    if(snapshot != null) {
+                      urlLink = await snapshot.ref.getDownloadURL();
+                      print(urlLink);
+                    }
                   }
-                print(urlLink);
-                  try{
-                    //TODO
-                    String url="https://94910edd9f75.ngrok.io/test";
-                    Map<String, String> headers = {"Content-type": "application/json"};
-                    String json='{"uid":"${auth.currentUser.uid}","FileName":"TODO","url":"${urlLink}"}';
-                    Response response = await put(url, headers: headers, body: json);
-                    int statusCode = response.statusCode;
-                    String body = response.body;
-                    print(body);
-                    print(statusCode);
-                    print(response.body);
-                    print("API done");
-
+                  if(urlLink!=null) {
+                    try {
+                      //TODO
+                      String url = "https://56100edbbacd.ngrok.io/test";
+                      Map<String, String> headers = {
+                        "Content-type": "application/json"
+                      };
+                      String json = '{"uid":"${auth.currentUser
+                          .uid}","FileName":"TODO","url":"$urlLink"}';
+                      Response response = await post(
+                          url, headers: headers, body: json);
+                      int statusCode = response.statusCode;
+                      String body = response.body;
+                      print(body);
+                      print(statusCode);
+                      print(response.body);
+                      print("API done");
+                      urlLink=null;
+                    }
+                    catch (e) {
+                      print(e);
+                    }
                   }
-                  catch(e){
-                    print(e);
-                  }
+                  else
+                    print('Url empty');
                 },
                 child: Text('Select From Gallery') ),
             SizedBox(
