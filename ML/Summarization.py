@@ -14,7 +14,7 @@ class Summarization:
             max_length=self.max_length,
             min_length=self.min_length,
             do_sample=self.do_sample,
-        )
+        )[0]['summary_text']
 
 
 if __name__ == "__main__":
