@@ -7,18 +7,19 @@ class Pdf extends StatefulWidget {
   Pdf(this.url);
   String url;
   @override
-  _PdfState createState() => _PdfState();
+  _PdfState createState() => _PdfState(url);
 }
 
 class _PdfState extends State<Pdf> {
-
+  String url;
+  _PdfState(this.url);
   bool _isLoading = true;
   PDFDocument document;
 
   @override
   void initState() {
     super.initState();
-    changePDF(2,widget.url);
+    changePDF(2,url);
   }
 
 

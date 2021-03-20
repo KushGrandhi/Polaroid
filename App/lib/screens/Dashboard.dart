@@ -18,6 +18,7 @@ class _DashBoardState extends State<DashBoard> {
   File finalfile;
   String description;
   String urlLink;
+
   @override
   Widget build(BuildContext context) {
 
@@ -62,7 +63,7 @@ class _DashBoardState extends State<DashBoard> {
                   if(urlLink!=null) {
                     try {
                       //TODO
-                      String url = "https://56100edbbacd.ngrok.io/test";
+                      String url = "https://e4d283293d9e.ngrok.io/test";
                       Map<String, String> headers = {
                         "Content-type": "application/json"
                       };
@@ -75,7 +76,6 @@ class _DashBoardState extends State<DashBoard> {
                       print(statusCode);
                       print(response.body);
                       print("API done");
-                      urlLink=null;
                     }
                     catch (e) {
                       print(e);

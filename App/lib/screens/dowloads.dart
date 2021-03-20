@@ -15,7 +15,7 @@ class _DownloadsState extends State<Downloads> {
       child: Container(
           padding: const EdgeInsets.all(20.0),
           child: StreamBuilder(
-              stream: FirebaseFirestore.instance.collection('3').snapshots(),
+              stream: FirebaseFirestore.instance.collection(auth.currentUser.uid).snapshots(),
               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
                 if(!snapshot.hasData){
                   return Center(
