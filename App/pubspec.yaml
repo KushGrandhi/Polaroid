@@ -23,6 +23,12 @@ environment:
 dependencies:
   image_picker: ^0.6.7+22
   video_compress: ^2.1.1
+  cloud_firestore: ^0.16.0
+  firebase_auth: ^0.20.1
+  firebase_core: ^0.7.0
+  firebase_storage: ^7.0.0
+  flutter_plugin_pdf_viewer: ^1.0.7
+  http: ^0.12.2
   flutter:
     sdk: flutter
 
@@ -34,10 +40,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  firebase_auth: ^0.20.1
-  firebase_core: ^0.7.0
-  firebase_storage: ^7.0.0
-  http: ^0.12.2
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
