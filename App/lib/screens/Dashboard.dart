@@ -16,6 +16,7 @@ class _DashBoardState extends State<DashBoard> {
   final FirebaseAuth auth = FirebaseAuth.instance;
   String _counter='Compress State';
   File finalfile;
+  String description;
   String urlLink;
   @override
   Widget build(BuildContext context) {
@@ -65,8 +66,7 @@ class _DashBoardState extends State<DashBoard> {
                       Map<String, String> headers = {
                         "Content-type": "application/json"
                       };
-                      String json = '{"uid":"${auth.currentUser
-                          .uid}","FileName":"TODO","url":"$urlLink"}';
+                      String json = '{"uid":"${auth.currentUser.uid}","FileName":"$description","url":"$urlLink"}';
                       Response response = await post(
                           url, headers: headers, body: json);
                       int statusCode = response.statusCode;
@@ -92,11 +92,16 @@ class _DashBoardState extends State<DashBoard> {
             SizedBox(
               height: 15,
             ),
-            Text('$_counter'),
-            SizedBox(
-              height: 15,
+            Padding(
+              padding: EdgeInsets.all(30),
+              child: TextField(
+                maxLength: 15,
+                onChanged: (value){
+                  description=value;
+
+                },
+              ),
             ),
-            (finalfile!=null)?Text(finalfile.path,textAlign: TextAlign.center,):Text('No file Compressed'),
           ],
         ),
       ),
