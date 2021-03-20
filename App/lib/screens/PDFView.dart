@@ -1,27 +1,53 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_plugin_pdf_viewer/flutter_plugin_pdf_viewer.dart';
-class PDFView extends StatefulWidget
-{
-  String url;
-  PDFView(this.url)
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return PDFViewState(url);
-  }
+import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 
+
+
+class Pdf extends StatefulWidget {
+  Pdf(this.url);
+  String url;
+  @override
+  _PdfState createState() => _PdfState();
 }
 
-class PDFViewState extends State<PDFView> {
-  String url;
-  PDFViewState(this.url);
+class _PdfState extends State<Pdf> {
+
+  bool _isLoading = true;
+  PDFDocument document;
+
+  @override
+  void initState() {
+    super.initState();
+    changePDF(2,widget.url);
+  }
+
+
+
+  changePDF(value,data) async {
+    setState(() => _isLoading = true);
+    if (value == 2) {
+      document = await PDFDocument.fromURL(data.toString());
+    }
+    setState(() => _isLoading = false);
+  }
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    Scaffold(
 
-      body: Container(),
+    return Scaffold(
+
+      appBar: AppBar(
+        title: const Text('FlutterPluginPDFViewer'),
+      ),
+      body: Center(
+        child: _isLoading
+            ? Center(child: CircularProgressIndicator())
+            : PDFViewer(
+          document: document,
+          zoomSteps: 1,
+
+        ),
+      ),
     );
   }
 }
