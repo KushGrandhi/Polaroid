@@ -36,10 +36,10 @@ class _DownloadsState extends State<Downloads> {
                                 child: Row(
                                   children: [
                                     ElevatedButton(onPressed: (){print(document['pdf url1']);setState(() {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Pdf(document['pdf url1'])));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Pdf(document['pdf url1'],document['description'])));
                                     });}, child: Icon(Icons.download_rounded)),
                                     ElevatedButton(onPressed: (){print(document['pdf url2']);setState(() {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Pdf(document['pdf url2'])));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Pdf(document['pdf url2'],document['description'])));
                                     });}, child: Icon(Icons.download_rounded)),
                                   ],
                                 ),
