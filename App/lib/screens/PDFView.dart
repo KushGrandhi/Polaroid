@@ -10,18 +10,19 @@ class Pdf extends StatefulWidget {
   String url="https://firebasestorage.googleapis.com/v0/b/polaroid-c6420.appspot.com/o/fpdf%2Fresume.pdf?alt=media&token=b20b9c3b-7c69-4483-9d83-59735122af08";
   String descrition="data";
   @override
-  _PdfState createState() => _PdfState();
+  _PdfState createState() => _PdfState(url);
 }
 
 class _PdfState extends State<Pdf> {
-
+  String url;
+  _PdfState(this.url);
   bool _isLoading = true;
   PDFDocument document;
 
   @override
   void initState() {
     super.initState();
-    changePDF(2,widget.url);
+    changePDF(2,url);
   }
 
 
