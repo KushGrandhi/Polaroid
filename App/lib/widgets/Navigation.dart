@@ -9,10 +9,10 @@ class Navigation extends StatefulWidget {
 
 class _NavigationState extends State<Navigation> {
   final List<Widget> _pages=[
+    DashBoard(),
     Downloads(),
-    DashBoard()
   ];
-  int _selectedPageIndex=1;
+  int _selectedPageIndex=0;
 
   void _selectpage(int index){
     setState(() {
@@ -26,14 +26,15 @@ class _NavigationState extends State<Navigation> {
     return Scaffold(
 
       bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.lightBlueAccent,
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.grey,
+          backgroundColor: Color.fromRGBO(255, 188, 117, 1).withOpacity(0.5),
+          selectedItemColor: Color.fromRGBO(215, 117, 255, 1),
+          unselectedItemColor: Colors.white60,
           currentIndex: _selectedPageIndex,
           onTap:_selectpage,
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.textsms),title: Text("Downloads")),
+
             BottomNavigationBarItem(icon: Icon(Icons.dashboard),title: Text("DashBoard")),
+            BottomNavigationBarItem(icon: Icon(Icons.textsms),title: Text("Downloads")),
           ]
       ),
       body: _pages[_selectedPageIndex],

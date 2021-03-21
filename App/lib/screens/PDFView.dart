@@ -112,6 +112,8 @@ class _PdfState extends State<Pdf> {
             },
           ),
         ],
+
+        backgroundColor: Color.fromRGBO(215, 117, 255, 1).withOpacity(0.5),elevation: 0, //TODO bg color
       ),
       body: Center(
         child: _isLoading
