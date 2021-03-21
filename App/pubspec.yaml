@@ -22,13 +22,19 @@ environment:
 
 dependencies:
   image_picker: ^0.6.7+22
+  google_fonts: ^1.1.2
   video_compress: ^2.1.1
   cloud_firestore: ^0.16.0
   firebase_auth: ^0.20.1
   firebase_core: ^0.7.0
   firebase_storage: ^7.0.0
   advance_pdf_viewer: ^1.2.2
+  flutter_downloader: ^1.5.2
+  permission_handler: ^5.1.0+1
+  downloads_path_provider: ^0.1.0
+  path_provider:
   http: ^0.12.2
+
   flutter:
     sdk: flutter
 
