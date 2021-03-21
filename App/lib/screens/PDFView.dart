@@ -6,9 +6,9 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:downloads_path_provider/downloads_path_provider.dart';
 class Pdf extends StatefulWidget {
-  Pdf(this.url,this.descrition);
-  String url="https://firebasestorage.googleapis.com/v0/b/polaroid-c6420.appspot.com/o/fpdf%2Fresume.pdf?alt=media&token=b20b9c3b-7c69-4483-9d83-59735122af08";
-  String descrition="data";
+  Pdf(this.url,this.description);
+  String url;
+  String description;
   @override
   _PdfState createState() => _PdfState(url);
 }
@@ -30,7 +30,7 @@ class _PdfState extends State<Pdf> {
   changePDF(value,data) async {
     setState(() => _isLoading = true);
     if (value == 2) {
-      document = await PDFDocument.fromURL("https://firebasestorage.googleapis.com/v0/b/polaroid-c6420.appspot.com/o/fpdf%2Fresume.pdf?alt=media&token=b20b9c3b-7c69-4483-9d83-59735122af08");
+      document = await PDFDocument.fromURL(url);
     }
     setState(() => _isLoading = false);
   }
@@ -51,14 +51,14 @@ class _PdfState extends State<Pdf> {
     return Scaffold(
 
       appBar: AppBar(
-        title:Text(widget.descrition),
+        title:Text(widget.description),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.download_sharp),
             color:Colors.white,
             onPressed: () async{
               final file = await _localPath;
-              String localPath = (await _localPath) + Platform.pathSeparator + "drop";
+              String localPath = (await _localPath) + Platform.pathSeparator + widget.description;
               print(localPath);
               final savedDir = Directory(localPath);
               bool hasExisted = await savedDir.exists();
@@ -76,7 +76,7 @@ class _PdfState extends State<Pdf> {
                     try{
 
                       final taskId = await FlutterDownloader.enqueue(
-                        url:"https://firebasestorage.googleapis.com/v0/b/polaroid-c6420.appspot.com/o/fpdf%2Fresume.pdf?alt=media&token=b20b9c3b-7c69-4483-9d83-59735122af08",
+                        url:url,
                         savedDir:file,
                         showNotification: false,
                         openFileFromNotification: false,
@@ -95,7 +95,7 @@ class _PdfState extends State<Pdf> {
                 try{
 
                   final taskId = await FlutterDownloader.enqueue(
-                    url:"https://firebasestorage.googleapis.com/v0/b/polaroid-c6420.appspot.com/o/fpdf%2Fresume.pdf?alt=media&token=b20b9c3b-7c69-4483-9d83-59735122af08",
+                    url:url,
                     savedDir:file,
                     showNotification: false,
                     openFileFromNotification: false,

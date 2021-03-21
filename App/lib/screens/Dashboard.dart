@@ -20,6 +20,7 @@ class _DashBoardState extends State<DashBoard> {
   String _counter = 'Compress State';
   var tempFile;
   File finalfile;
+  int flag=0;
   String description;
   String urlLink;
   @override
@@ -51,18 +52,8 @@ class _DashBoardState extends State<DashBoard> {
                     tempFile = await ImagePicker().getVideo(
                       source: ImageSource.gallery,
                     );
-                    await VideoCompress.setLogLevel(0);
-                    final info = await VideoCompress.compressVideo(
-                      tempFile.path,
-                      quality: VideoQuality.LowQuality,
-                      deleteOrigin: false,
-                      includeAudio: true,
-                    );
-                    if (info != null) {
                       setState(() {
-                        _counter = "Successfully Compressed";
-                        finalfile = File(info.path);
-                        print(info.filesize);
+                        finalfile = File(tempFile.path);
                         print(finalfile.path);
                       });
 
@@ -75,11 +66,10 @@ class _DashBoardState extends State<DashBoard> {
                           urlLink = await snapshot.ref.getDownloadURL();
                           print(urlLink);
                         }
-                      }
                       if(urlLink!=null) {
                         try {
                           //TODO
-                          String url = "https://56100edbbacd.ngrok.io/test";
+                          String url = "https://bef948d61b3c.ngrok.io/test";
                           Map<String, String> headers = {
                             "Content-type": "application/json"
                           };
@@ -92,7 +82,7 @@ class _DashBoardState extends State<DashBoard> {
                           print(statusCode);
                           print(response.body);
                           print("API done");
-                          urlLink=null;
+                          flag=1;
                         }
                         catch (e) {
                           print(e);
@@ -183,7 +173,9 @@ class _DashBoardState extends State<DashBoard> {
                   onChanged: (value) {
                     description = value;
                   },
-                )
+                ),
+                SizedBox(height: 20,),
+                flag==1?Text('PDF Generated.Check Downloads Tab',style: TextStyle(fontSize: 30),):Text(''),
               ],
             ),
           ),
